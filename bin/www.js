@@ -4,19 +4,10 @@ var app = require('../app');
 var debug = require('debug')('WebLibExpress:server');
 var http = require('http');
 
-var port;
-if (typeof OPENSHIFT_NODEJS_PORT != 'undefined' && OPENSHIFT_NODEJS_PORT)
-  port = OPENSHIFT_NODEJS_PORT;
-else
-  port = normalizePort(process.env.PORT || '3000');
-
+var port = process.env.OPENSHIFT_NODEJS_PORT ||  normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-var ip;
-if (typeof OPENSHIFT_NODEJS_IP != 'undefined' && OPENSHIFT_NODEJS_IP)
-  ip = OPENSHIFT_NODEJS_IP;
-else
-  ip = 'localhost';
+var ip = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
 
 var server = http.createServer(app);
 

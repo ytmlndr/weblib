@@ -8,6 +8,7 @@ var port = process.env.OPENSHIFT_NODEJS_PORT ||  normalizePort(process.env.PORT 
 app.set('port', port);
 
 var ip = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
+app.set('ip', ip);
 
 var server = http.createServer(app);
 

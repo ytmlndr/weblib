@@ -4,12 +4,13 @@ var app = require('../app');
 var debug = require('debug')('WebLibExpress:server');
 var http = require('http');
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || '3000');
+var ip = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
 app.set('port', port);
 
 var server = http.createServer(app);
 
-server.listen(port);
+server.listen(port, ip);
 server.on('error', onError);
 server.on('listening', onListening);
 

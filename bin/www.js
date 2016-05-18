@@ -4,15 +4,12 @@ var app = require('../app');
 var debug = require('debug')('WebLibExpress:server');
 var http = require('http');
 
-var port = process.env.OPENSHIFT_NODEJS_PORT ||  normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
-var ip = process.env.OPENSHIFT_NODEJS_IP || 'localhost';
-app.set('ip', ip);
 
 var server = http.createServer(app);
 
-server.listen(port, ip);
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -61,6 +58,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind)
-  console.log('Listening on ' + addr.address + ":" + addr.port);
+  console.log('Weblib is running on port' + app.get('port'));
 }

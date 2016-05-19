@@ -8,14 +8,17 @@ var corsOptions = {
   allowHeaders: 'Content-Type'
 };
 
+var routeRegex = '/:var(app)?';
+
 router.options('/', cors(corsOptions));
 
 /* GET home page. */
-router.get('/', function (req, res) {
+router.get(routeRegex, function (req, res) {
   res.render('index', { title: 'WebLib' });
 });
 
-router.post('/', cors(corsOptions), function (req, res) {
+/* Post to home page */
+router.post(routeRegex, cors(corsOptions), function (req, res) {
   console.log('got post: ' + JSON.stringify(req.body));
   res.json({ 
     msg: req.body.msg,
